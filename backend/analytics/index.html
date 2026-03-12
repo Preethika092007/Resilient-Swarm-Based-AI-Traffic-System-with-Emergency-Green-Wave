@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Traffic Analysis Module</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <span class="icon">🚦</span>
+                <h1>Smart Traffic Analytics</h1>
+            </div>
+            <div class="tagline">Resilient Swarm-Based AI Traffic Management System</div>
+        </header>
+
+        <main>
+            <section class="simulation-section">
+                <div class="card canvas-card">
+                    <div class="card-header">
+                        <h2>Live Road View</h2>
+                        <div class="status-indicator">
+                            <span class="dot pulse"></span> Live Simulation
+                        </div>
+                    </div>
+                    <div class="canvas-wrapper">
+                        <canvas id="trafficCanvas" width="800" height="400"></canvas>
+                    </div>
+                    <div class="road-labels">
+                        <div class="lane-label">Lane A</div>
+                        <div class="lane-label">Lane B</div>
+                        <div class="lane-label">Lane C</div>
+                        <div class="lane-label">Lane D</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="analytics-section">
+                <div class="card stats-card">
+                    <div class="card-header">
+                        <h2>Traffic Analysis Dashboard</h2>
+                    </div>
+                    <div class="stats-grid" id="statsGrid">
+                        <!-- Lane A -->
+                        <div class="stat-item" id="lane-a-stat">
+                            <div class="lane-name">Lane A</div>
+                            <div class="vehicle-count">0 <small>veh</small></div>
+                            <div class="density-chip status-low">LOW</div>
+                        </div>
+                        <!-- Lane B -->
+                        <div class="stat-item" id="lane-b-stat">
+                            <div class="lane-name">Lane B</div>
+                            <div class="vehicle-count">0 <small>veh</small></div>
+                            <div class="density-chip status-low">LOW</div>
+                        </div>
+                        <!-- Lane C -->
+                        <div class="stat-item" id="lane-c-stat">
+                            <div class="lane-name">Lane C</div>
+                            <div class="vehicle-count">0 <small>veh</small></div>
+                            <div class="density-chip status-low">LOW</div>
+                        </div>
+                        <!-- Lane D -->
+                        <div class="stat-item" id="lane-d-stat">
+                            <div class="lane-name">Lane D</div>
+                            <div class="vehicle-count">0 <small>veh</small></div>
+                            <div class="density-chip status-low">LOW</div>
+                        </div>
+                    </div>
+                    <div class="total-stats">
+                        <div class="total-label">Total Vehicles Detected</div>
+                        <div class="total-value" id="totalVehicles">0</div>
+                    </div>
+                    <div class="output-preview">
+                        <div class="preview-header">
+                            <span>JSON Data Stream</span>
+                            <button class="copy-btn">Export</button>
+                        </div>
+                        <pre id="jsonOutput">{}</pre>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>

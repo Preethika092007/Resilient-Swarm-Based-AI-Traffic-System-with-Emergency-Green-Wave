@@ -1,0 +1,53 @@
+.App {
+  min-height: 100vh;
+}
+
+.main-container {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 30px 20px;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 40px;
+  color: white;
+  animation: fadeIn 0.5s ease-in;
+}
+
+.section-header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.section-header p {
+  font-size: 1.1rem;
+  opacity: 0.95;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .main-container {
+    padding: 20px 12px;
+  }
+  
+  .section-header h1 {
+    font-size: 1.75rem;
+  }
+  
+  .section-header p {
+    font-size: 0.95rem;
+  }
+}

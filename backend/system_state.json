@@ -1,0 +1,33 @@
+{
+  "vehicle_count": 1,
+  "traffic_density": "Low",
+  "lane_distribution": {
+    "Lane A": 0,
+    "Lane B": 0,
+    "Lane C": 0,
+    "Lane D": 1
+  },
+  "signal_timings": {
+    "Lane A": {
+      "green_time": 60,
+      "is_priority": false
+    },
+    "Lane B": {
+      "green_time": 60,
+      "is_priority": false
+    },
+    "Lane C": {
+      "green_time": 60,
+      "is_priority": false
+    },
+    "Lane D": {
+      "green_time": 60,
+      "is_priority": true
+    }
+  },
+  "priority_lane": "Lane D",
+  "emergency_detected": false,
+  "emergency_type": null,
+  "green_wave_active": false,
+  "green_wave_route": []
+}

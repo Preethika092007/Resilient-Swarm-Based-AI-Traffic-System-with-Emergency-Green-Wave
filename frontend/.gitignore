@@ -1,0 +1,9 @@
+node_modules
+datasets/
+runs/
+*.pt
+*.zip
+*.mp4
+*.jpg
+*.png
+__pycache__/
