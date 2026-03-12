@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart City Traffic Command Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="brand-icon">🚦</span>
+                <span class="brand-text">Smart Traffic Control</span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item active" data-section="dashboard">
+                    <span class="nav-icon">📊</span>
+                    <span>Dashboard</span>
+                </li>
+                <li class="nav-item" data-section="live-map">
+                    <span class="nav-icon">🗺️</span>
+                    <span>Live Map</span>
+                </li>
+                <li class="nav-item" data-section="analytics"></li>
+                    <span class="nav-icon">📈</span>
+                    <span>Analytics</span>
+                </li>
+                <li class="nav-item" data-section="emergency">
+                    <span class="nav-icon">🚨</span>
+                    <span>Emergency</span>
+                </li>
+                <li class="nav-item" data-section="signals">
+                    <span class="nav-icon">🚥</span>
+                    <span>Signals</span>
+                </li>
+                <li class="nav-item" data-section="logs">
+                    <span class="nav-icon">�</span>
+                    <span>System Logs</span>
+                </li>
+            </ul>
+            <button class="mobile-toggle" id="mobileToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="content-section active">
+            <div class="section-header">
+                <h1>Traffic Command Dashboard</h1>
+                <p>AI-driven adaptive traffic management with emergency green wave system</p>
+            </div>
+
+            <!-- Real-time KPI Cards -->
+            <div class="kpi-grid">
+                <div class="kpi-card kpi-primary">
+                    <div class="kpi-icon">🚗</div>
+                    <div class="kpi-content">
+                        <div class="kpi-label">Vehicles Detected</div>
+                        <div class="kpi-value" id="vehicles">1,247</div>
+                        <div class="kpi-trend positive">↑ 12% from last hour</div>
+                    </div>
+                </div>
+                <div class="kpi-card kpi-warning">
+                    <div class="kpi-icon">📊</div>
+                    <div class="kpi-content">
+                        <div class="kpi-label">Traffic Density</div>
+                        <div class="kpi-value" id="density">Medium</div>
+                        <div class="kpi-trend neutral">→ Stable</div>
+                    </div>
+                </div>
+                <div class="kpi-card kpi-success">
+                    <div class="kpi-icon">⚙️</div>
+                    <div class="kpi-content">
+                        <div class="kpi-label">Signal Mode</div>
+                        <div class="kpi-value" id="mode">Adaptive</div>
+                        <div class="kpi-trend positive">✓ Optimized</div>
+                    </div>
+                </div>
+                <div class="kpi-card kpi-danger">
+                    <div class="kpi-icon">🚨</div>
+                    <div class="kpi-content">
+                        <div class="kpi-label">Emergency Status</div>
+                        <div class="kpi-value" id="emergency">Active</div>
+                        <div class="kpi-trend alert">⚠ Green Wave ON</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Emergency Alert -->
+            <div class="alert-banner" id="alertBanner">
+                <div class="alert-pulse"></div>
+                <div class="alert-content">
+                    <span class="alert-icon">🚨</span>
+                    <div class="alert-text">
+                        <strong>Emergency Vehicle Detected – Green Wave Activated</strong>
+                        <div class="alert-route">
+                            <span class="route-badge">Route:</span>
+                            <span class="route-path">Intersection A</span>
+                            <span class="route-arrow">→</span>
+                            <span class="route-path">B</span>
+                            <span class="route-arrow">→</span>
+                            <span class="route-path">C</span>
+                            <span class="route-arrow">→</span>
+                            <span class="route-path">D</span>
+                        </div>
+                    </div>
+                    <button class="alert-action">View Details</button>
+                </div>
+            </div>
+
+            <!-- Interactive Grid -->
+            <div class="dashboard-grid">
+                <div class="card intersection-card">
+                    <div class="card-header">
+                        <h2>Live Intersection View</h2>
+                        <div class="card-actions">
+                            <button class="btn-icon" title="Refresh">🔄</button>
+                            <button class="btn-icon" title="Fullscreen">⛶</button>
+                        </div>
+                    </div>
+                    <div class="intersection-wrapper">
+                        <canvas id="intersectionCanvas" width="500" height="500"></canvas>
+                        <div class="intersection-controls">
+                            <button class="control-btn" onclick="toggleSimulation()">
+                                <span id="playPauseIcon">⏸️</span> <span id="playPauseText">Pause</span>
+                            </button>
+                            <button class="control-btn" onclick="resetSimulation()">🔄 Reset</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card signal-card">
+                    <div class="card-header">
+                        <h2>Signal Status</h2>
+                        <span class="status-badge live">● LIVE</span>
+                    </div>
+                    <div class="signal-grid">
+                        <div class="signal-item" data-lane="A">
+                            <div class="signal-header">
+                                <span class="signal-name">Lane A (North)</span>
+                                <span class="signal-timer" id="timerA">45s</span>
+                            </div>
+                            <div class="signal-bar">
+                                <div class="signal-progress green" id="progressA" style="width: 75%"></div>
+                            </div>
+                            <div class="signal-status">
+                                <span class="status-light green"></span>
+                                <span class="status-text">Green - Active</span>
+                            </div>
+                        </div>
+                        <div class="signal-item" data-lane="B">
+                            <div class="signal-header">
+                                <span class="signal-name">Lane B (East)</span>
+                                <span class="signal-timer" id="timerB">30s</span>
+                            </div>
+                            <div class="signal-bar">
+                                <div class="signal-progress red" id="progressB" style="width: 50%"></div>
+                            </div>
+                            <div class="signal-status">
+                                <span class="status-light red"></span>
+                                <span class="status-text">Red - Stopped</span>
+                            </div>
+                        </div>
+                        <div class="signal-item" data-lane="C">
+                            <div class="signal-header">
+                                <span class="signal-name">Lane C (South)</span>
+                                <span class="signal-timer" id="timerC">15s</span>
+                            </div>
+                            <div class="signal-bar">
+                                <div class="signal-progress yellow" id="progressC" style="width: 25%"></div>
+                            </div>
+                            <div class="signal-status">
+                                <span class="status-light yellow"></span>
+                                <span class="status-text">Yellow - Waiting</span>
+                            </div>
+                        </div>
+                        <div class="signal-item" data-lane="D">
+                            <div class="signal-header">
+                                <span class="signal-name">Lane D (West)</span>
+                                <span class="signal-timer" id="timerD">60s</span>
+                            </div>
+                            <div class="signal-bar">
+                                <div class="signal-progress blue" id="progressD" style="width: 100%"></div>
+                            </div>
+                            <div class="signal-status">
+                                <span class="status-light blue"></span>
+                                <span class="status-text">Blue - Preparing</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-icon">⏱️</div>
+                    <div class="stat-info">
+                        <div class="stat-value">2.3 min</div>
+                        <div class="stat-label">Avg Wait Time</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🎯</div>
+                    <div class="stat-info">
+                        <div class="stat-value">94.2%</div>
+                        <div class="stat-label">Efficiency</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⚡</div>
+                    <div class="stat-info">
+                        <div class="stat-value">12</div>
+                        <div class="stat-label">Active Signals</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🔔</div>
+                    <div class="stat-info">
+                        <div class="stat-value">3</div>
+                        <div class="stat-label">Alerts Today</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Live Map Section -->
+        <section id="live-map" class="content-section">
+            <div class="section-header">
+                <h1>Live Traffic Map</h1>
+                <p>Real-time city-wide traffic monitoring</p>
+            </div>
+            <div class="map-container">
+                <canvas id="cityMapCanvas" width="1200" height="600"></canvas>
+                <div class="map-legend">
+                    <div class="legend-item"><span class="legend-color" style="background: #27ae60"></span> Low Traffic</div>
+                    <div class="legend-item"><span class="legend-color" style="background: #f39c12"></span> Medium Traffic</div>
+                    <div class="legend-item"><span class="legend-color" style="background: #e74c3c"></span> High Traffic</div>
+                    <div class="legend-item"><span class="legend-color" style="background: #9b59b6"></span> Emergency Route</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Analytics Section -->
+        <section id="analytics" class="content-section">
+            <div class="section-header">
+                <h1>Traffic Analytics</h1>
+                <p>Historical data and trends</p>
+            </div>
+            <div class="analytics-grid">
+                <div class="card chart-card">
+                    <div class="card-header">
+                        <h2>Vehicle Count Over Time</h2>
+                        <select class="chart-filter">
+                            <option>Last Hour</option>
+                            <option>Last 6 Hours</option>
+                            <option>Last 24 Hours</option>
+                            <option>Last Week</option>
+                        </select>
+                    </div>
+                    <canvas id="trafficChart" height="300"></canvas>
+                </div>
+                <div class="card chart-card">
+                    <div class="card-header">
+                        <h2>Traffic Density Distribution</h2>
+                    </div>
+                    <canvas id="densityChart" height="300"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Emergency Section -->
+        <section id="emergency" class="content-section">
+            <div class="section-header">
+                <h1>Emergency Management</h1>
+                <p>Emergency vehicle tracking and green wave control</p>
+            </div>
+            <div class="emergency-grid">
+                <div class="card emergency-card">
+                    <div class="card-header">
+                        <h2>Active Emergency Vehicles</h2>
+                        <span class="count-badge">2</span>
+                    </div>
+                    <div class="emergency-list">
+                        <div class="emergency-item active">
+                            <div class="emergency-icon">🚑</div>
+                            <div class="emergency-info">
+                                <div class="emergency-title">Ambulance #A-247</div>
+                                <div class="emergency-route">Route: A → B → C → D</div>
+                                <div class="emergency-eta">ETA: 4 minutes</div>
+                            </div>
+                            <div class="emergency-status">
+                                <span class="status-badge active">Active</span>
+                            </div>
+                        </div>
+                        <div class="emergency-item active">
+                            <div class="emergency-icon">🚒</div>
+                            <div class="emergency-info">
+                                <div class="emergency-title">Fire Truck #F-103</div>
+                                <div class="emergency-route">Route: E → F → G</div>
+                                <div class="emergency-eta">ETA: 7 minutes</div>
+                            </div>
+                            <div class="emergency-status">
+                                <span class="status-badge active">Active</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Green Wave Status</h2>
+                    </div>
+                    <div class="green-wave-visual">
+                        <div class="wave-path">
+                            <div class="wave-node active">A</div>
+                            <div class="wave-connector active"></div>
+                            <div class="wave-node active">B</div>
+                            <div class="wave-connector active"></div>
+                            <div class="wave-node active">C</div>
+                            <div class="wave-connector"></div>
+                            <div class="wave-node">D</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Signals Section -->
+        <section id="signals" class="content-section">
+            <div class="section-header">
+                <h1>Signal Control</h1>
+                <p>Manage and monitor all traffic signals</p>
+            </div>
+            <div class="signals-grid">
+                <div class="signal-control-card">
+                    <div class="signal-control-header">
+                        <h3>Intersection A</h3>
+                        <button class="btn-primary">Override</button>
+                    </div>
+                    <div class="signal-control-body">
+                        <div class="control-row">
+                            <span>Mode:</span>
+                            <select class="control-select">
+                                <option>Adaptive</option>
+                                <option>Manual</option>
+                                <option>Timed</option>
+                            </select>
+                        </div>
+                        <div class="control-row">
+                            <span>Cycle Time:</span>
+                            <input type="range" min="30" max="120" value="60" class="control-slider">
+                            <span class="control-value">60s</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="signal-control-card">
+                    <div class="signal-control-header">
+                        <h3>Intersection B</h3>
+                        <button class="btn-primary">Override</button>
+                    </div>
+                    <div class="signal-control-body">
+                        <div class="control-row">
+                            <span>Mode:</span>
+                            <select class="control-select">
+                                <option>Adaptive</option>
+                                <option>Manual</option>
+                                <option>Timed</option>
+                            </select>
+                        </div>
+                        <div class="control-row">
+                            <span>Cycle Time:</span>
+                            <input type="range" min="30" max="120" value="45" class="control-slider">
+                            <span class="control-value">45s</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="signal-control-card">
+                    <div class="signal-control-header">
+                        <h3>Intersection C</h3>
+                        <button class="btn-primary">Override</button>
+                    </div>
+                    <div class="signal-control-body">
+                        <div class="control-row">
+                            <span>Mode:</span>
+                            <select class="control-select">
+                                <option selected>Adaptive</option>
+                                <option>Manual</option>
+                                <option>Timed</option>
+                            </select>
+                        </div>
+                        <div class="control-row">
+                            <span>Cycle Time:</span>
+                            <input type="range" min="30" max="120" value="75" class="control-slider">
+                            <span class="control-value">75s</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="signal-control-card">
+                    <div class="signal-control-header">
+                        <h3>Intersection D</h3>
+                        <button class="btn-primary">Override</button>
+                    </div>
+                    <div class="signal-control-body">
+                        <div class="control-row">
+                            <span>Mode:</span>
+                            <select class="control-select">
+                                <option>Adaptive</option>
+                                <option>Manual</option>
+                                <option selected>Timed</option>
+                            </select>
+                        </div>
+                        <div class="control-row">
+                            <span>Cycle Time:</span>
+                            <input type="range" min="30" max="120" value="90" class="control-slider">
+                            <span class="control-value">90s</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- System Logs Section -->
+        <section id="logs" class="content-section">
+            <div class="section-header">
+                <h1>System Logs</h1>
+                <p>Real-time system events and activities</p>
+            </div>
+            <div class="logs-container-wrapper">
+                <div class="logs-filters">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="emergency">Emergency</button>
+                    <button class="filter-btn" data-filter="signal">Signal</button>
+                    <button class="filter-btn" data-filter="system">System</button>
+                </div>
+                <div class="logs-list" id="logsContainer">
+                    <div class="log-entry emergency">
+                        <span class="log-icon">🚨</span>
+                        <span class="log-time">14:32:15</span>
+                        <span class="log-type">EMERGENCY</span>
+                        <span class="log-message">Emergency vehicle detected on Lane A</span>
+                    </div>
+                    <div class="log-entry signal">
+                        <span class="log-icon">🚥</span>
+                        <span class="log-time">14:32:16</span>
+                        <span class="log-type">SIGNAL</span>
+                        <span class="log-message">Signal override initiated</span>
+                    </div>
+                    <div class="log-entry emergency">
+                        <span class="log-icon">🚨</span>
+                        <span class="log-time">14:32:17</span>
+                        <span class="log-type">EMERGENCY</span>
+                        <span class="log-message">Green wave activated: A → B → C → D</span>
+                    </div>
+                    <div class="log-entry signal">
+                        <span class="log-icon">🚥</span>
+                        <span class="log-time">14:32:20</span>
+                        <span class="log-type">SIGNAL</span>
+                        <span class="log-message">Lane A signal changed to GREEN</span>
+                    </div>
+                    <div class="log-entry system">
+                        <span class="log-icon">⚙️</span>
+                        <span class="log-time">14:32:22</span>
+                        <span class="log-type">SYSTEM</span>
+                        <span class="log-message">Traffic flow optimized</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+.signal-card {
+  background: white;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.signal-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.signal-item {
+  padding: 16px;
+  background: #f7fafc;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.signal-item:hover {
+  background: #edf2f7;
+  transform: translateX(4px);
+}
+
+.signal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.signal-name {
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.signal-timer {
+  font-weight: 700;
+  color: #667eea;
+  font-size: 1.1rem;
+}
+
+.signal-bar {
+  height: 8px;
+  background: #e2e8f0;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.signal-progress {
+  height: 100%;
+  transition: width 1s linear;
+  border-radius: 4px;
+}
+
+.signal-progress.green {
+  background: linear-gradient(90deg, #48bb78, #38a169);
+}
+
+.signal-progress.red {
+  background: linear-gradient(90deg, #f56565, #e53e3e);
+}
+
+.signal-progress.yellow {
+  background: linear-gradient(90deg, #ed8936, #dd6b20);
+}
+
+.signal-progress.blue {
+  background: linear-gradient(90deg, #4299e1, #3182ce);
+}
+
+.signal-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-light {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  box-shadow: 0 0 8px currentColor;
+}
+
+.status-light.green {
+  background: #48bb78;
+}
+
+.status-light.red {
+  background: #f56565;
+}
+
+.status-light.yellow {
+  background: #ed8936;
+}
+
+.status-light.blue {
+  background: #4299e1;
+}
+
+.status-text {
+  font-size: 0.875rem;
+  color: #4a5568;
+}
+
+.status-badge {
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.status-badge.live {
+  background: #48bb78;
+  color: white;
+}

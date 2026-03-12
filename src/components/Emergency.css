@@ -1,0 +1,194 @@
+.emergency-section {
+  animation: fadeIn 0.5s ease-in;
+}
+
+.emergency-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 24px;
+}
+
+.emergency-card {
+  background: white;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.emergency-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.emergency-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  background: #f7fafc;
+  border-radius: 12px;
+  border-left: 4px solid #fc5c7d;
+  transition: all 0.3s ease;
+}
+
+.emergency-item:hover {
+  background: #edf2f7;
+  transform: translateX(4px);
+}
+
+.emergency-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.emergency-icon::before {
+  content: '';
+  position: absolute;
+  background: #fc5c7d;
+}
+
+.emergency-icon.ambulance::before {
+  width: 32px;
+  height: 20px;
+  border-radius: 4px;
+}
+
+.emergency-icon.fire-truck::before {
+  width: 28px;
+  height: 22px;
+  border-radius: 4px;
+}
+
+.emergency-info {
+  flex: 1;
+}
+
+.emergency-title {
+  font-weight: 700;
+  color: #2d3748;
+  margin-bottom: 4px;
+}
+
+.emergency-route {
+  font-size: 0.875rem;
+  color: #718096;
+  margin-bottom: 4px;
+}
+
+.emergency-eta {
+  font-size: 0.875rem;
+  color: #667eea;
+  font-weight: 600;
+}
+
+.count-badge {
+  background: #fc5c7d;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.status-badge.active {
+  background: #48bb78;
+  color: white;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.green-wave-visual {
+  padding: 40px 20px;
+}
+
+.wave-path {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+}
+
+.wave-node {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #718096;
+  transition: all 0.3s ease;
+}
+
+.wave-node.active {
+  background: linear-gradient(135deg, #48bb78, #38a169);
+  color: white;
+  box-shadow: 0 4px 12px rgba(72, 187, 120, 0.4);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.wave-connector {
+  width: 80px;
+  height: 4px;
+  background: #e2e8f0;
+  transition: all 0.3s ease;
+}
+
+.wave-connector.active {
+  background: linear-gradient(90deg, #48bb78, #38a169);
+  box-shadow: 0 2px 8px rgba(72, 187, 120, 0.4);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+@media (max-width: 1024px) {
+  .emergency-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .wave-path {
+    flex-wrap: wrap;
+  }
+  
+  .wave-node {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+  }
+  
+  .wave-connector {
+    width: 40px;
+  }
+}
